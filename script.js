@@ -1,6 +1,5 @@
 let humanScore = 0;
 let computerScore = 0;
-let rounds = Number(prompt("How many rounds do you want to play?"));
 
 function getComputerChoice() {
     const computerChoice = ["rock", "paper", "scissors"];
@@ -11,61 +10,81 @@ function getComputerChoice() {
 
 
 
-function getHumanChoice() {
-    const arrayHumanChoice = [];
-    const humanChoice = prompt("Choose 'Rock, Paper, Scissors'");
-    arrayHumanChoice.push(humanChoice.toLowerCase());
-
-    return arrayHumanChoice[arrayHumanChoice.length - 1]; 
-};
-
+const result = document.getElementById("result");
+const human_score = document.getElementById("human");
+const computer_score = document.getElementById("computer");
 
 
 function playRound(human, computer) {
     if(human == computer) {
-        console.log(`It is a tie! ${human} ties with ${computer}`);
-        console.log("Human = " + humanScore);
-        console.log("Computer = " + computerScore);
-        console.log("");
+        result.style.color = "black";
+        result.style.display = "block";
+        result.innerHTML = `It's a tie! ${human} ties with ${computer}`;
+
+        human_score.style.display = "block";
+        human_score.innerHTML = `Human: ${humanScore}`;
+
+        computer_score.style.display = "block";
+        computer_score.innerHTML = `Computer: ${computerScore}`;
         
     } else if(human == "rock" && computer == "paper" || human == "paper" && computer == "scissors" || human == "scissors" && computer == "rock") {
+        result.style.display = "block";
+        result.style.color = "red";
+        result.innerHTML = `You lose! ${computer} beats ${human}`;
+        
+        human_score.style.display = "block";
+        human_score.innerHTML = `Human: ${humanScore}`;
+        
+        computer_score.style.display = "block";
         computerScore++;
-        console.log(`You lose! ${computer} beats ${human}`);
-        console.log("Human = " + humanScore);
-        console.log("Computer = " + computerScore);
-        console.log("");
+        computer_score.innerHTML = `Computer: ${computerScore}`;
 
     } else if(human == "rock" && computer == "scissors" || human == "paper" && computer == "rock" || human == "scissors" && computer == "paper") {
+        result.style.display = "block";
+        result.style.color = "green";
+        result.innerHTML = `You won! ${human} beats ${computer}`;
+        
+        human_score.style.display = "block";
         humanScore++;
-        console.log(`You win! ${human} beats ${computer}`);
-        console.log("Human = " + humanScore);
-        console.log("Computer = " + computerScore);
-        console.log("");
+        human_score.innerHTML = `Human: ${humanScore}`;
 
-    } else {
-        console.log("Impossible to play, you haven't selected either rock, paper, scissors.");
-        console.log("");
-    }
-
-
-};
-
-function playGame(round) {
-    if(typeof round == "number") {
-        for(let i = 0; i < round; i++) {
-            let computerSelection = getComputerChoice();
-            playRound(humanSelection, computerSelection);
-        }
-    } else {
-        console.log("Impossible to play, the number of rounds are not numbers");
+        computer_score.style.display = "block";
+        computer_score.innerHTML = `Computer: ${computerScore}`;
     }
 };
 
 
 
-let humanSelection = getHumanChoice();
-playGame(rounds);
+function endGame() {
+    if(humanScore == 5) {
+        winner.style.display = "block";
+        winner.innerHTML = `The human player won. Game ends!`;
+    } else if(computerScore == 5) {
+        winner.style.display = "block";
+        winner.innerHTML = `The computer player won. Game ends!`;
+    }   
+};
 
-console.log("N° rounds: " + rounds);
-let tiesNumber = rounds - humanScore - computerScore;
-console.log("Ties: " + tiesNumber);
+
+
+// const rounds = Number(document.getElementById("rounds").value);
+// console.log(rounds)
+const rock_button = document.getElementById("rock-button");
+const paper_button = document.getElementById("paper-button");
+const scissors_button = document.getElementById("scissors-button");
+
+
+rock_button.addEventListener("click", () => {
+    playRound("rock", getComputerChoice());
+    endGame();
+});
+
+paper_button.addEventListener("click", () => {
+    playRound("paper", getComputerChoice());
+    endGame();
+});
+
+scissors_button.addEventListener("click", () => {
+    playRound("scissors", getComputerChoice());
+    endGame();
+});

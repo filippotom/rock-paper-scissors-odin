@@ -3,10 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
-    <title>Document</title>
+    <title>RPS</title>
 </head>
-<body style="background-color: black; height: 100vh;">
+<body>
+    <div class="start">
+        <h1>Rock Paper Scissors!</h1>
+        <p>Rules are simple: first to win 5 rounds, select your option and hope to win against the faith...</p>
+    </div>
+    
+    <div class="container">
+        <!-- <form action="">
+            <label for="rounds">Rounds: </label>
+            <input type="number" name="rounds" id="rounds" value="1">
+        </form> -->
 
+        <div class="container-card">
+            <div class="card">
+                <img src="rock.png" alt="rock">
+                <button id="rock-button">Rock</button>
+            </div>
+            
+            <div class="card">
+                <img src="paper.png" alt="paper">
+                <button id="paper-button">Paper</button>
+            </div>
+                
+            <div class="card">
+                <img src="scissors.png" alt="scissors">
+                <button id="scissors-button">Scissors</button>
+            </div>
+        </div>
+    </div>    
+
+
+    <div id="result"></div>
+    <div id="human" class="score"></div>
+    <div id="computer" class="score"></div>
+    <div id="winner"></div>
 </body>
 </html>
